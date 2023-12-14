@@ -27,18 +27,15 @@ class App {
             return "{}";
         }
 
-        String[] result = new String[wordsCount.size()];
-        int index = 0;
-
+        StringBuilder result = new StringBuilder("{\n");
         String space = "  ";
 
         for (var entry : wordsCount.entrySet()) {
-            String resultString = space + entry.getKey() + ": " + entry.getValue();
-            result[index] = resultString;
-            index++;
+            result.append(space + entry.getKey() + ": " + entry.getValue() + "\n");
         }
 
-        return "{\n" + String.join("\n", result) + "\n}";
+        result.append("}");
+        return result.toString();
     }
 }
 //END
