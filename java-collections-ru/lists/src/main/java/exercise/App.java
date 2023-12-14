@@ -7,17 +7,17 @@ import java.util.List;
 // BEGIN
 class App {
     public static boolean scrabble(String letters, String word) {
-        String lowerLetters = letters.toLowerCase();
-        String lowerWord = word.toLowerCase();
+        String[] symbols = letters.split("");
+        List coll = new ArrayList(Arrays.asList(symbols));
 
-        for (char letter : lowerWord.toCharArray()) {
-            int index = lowerLetters.indexOf(letter);
+        for (int i = 0; i < word.length(); i++) {
+            String currentLetter = word.substring(i, i + 1).toLowerCase();
 
-            if (index == -1) {
+            if (!coll.contains(currentLetter)) {
                 return false;
             }
 
-            lowerLetters = lowerLetters.replaceFirst(Character.toString(letter), "");
+            coll.remove(currentLetter);
         }
 
         return true;
