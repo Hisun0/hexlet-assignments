@@ -11,11 +11,7 @@ public class App {
                 .map(line -> line.replaceAll("\"|environment=", ""))
                 .flatMap(line -> Arrays.stream(line.split(",")))
                 .filter(variable -> variable.startsWith("X_FORWARDED_"))
-                .map(variable -> {
-                    String[] parts = variable.split("=");
-                    int prefixLength = "X_FORWARDED_".length();
-                    return parts[0].substring(prefixLength) + "=" + parts[1];
-                })
+                .map(variable -> variable.replaceFirst("X_FORWARDED_", ""))
                 .collect(Collectors.joining(","));
     }
 }
