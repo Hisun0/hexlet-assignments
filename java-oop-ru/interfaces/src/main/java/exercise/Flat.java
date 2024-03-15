@@ -14,21 +14,8 @@ public class Flat implements Home {
         return this.totalArea;
     }
 
-    @Override
-    public int compareTo() {
-        return 0;
-    }
-
     public int compareTo(Home another) {
-        if (this.totalArea > another.getArea()) {
-            return 1;
-        }
-
-        if (this.totalArea < another.getArea()) {
-            return -1;
-        }
-
-        return 0;
+        return Double.compare(this.totalArea, another.getArea());
     }
 
     public String toString() {
