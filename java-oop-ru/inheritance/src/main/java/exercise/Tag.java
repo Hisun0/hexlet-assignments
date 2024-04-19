@@ -6,35 +6,26 @@ import java.util.Map;
 
 // BEGIN
 public abstract class Tag {
+
     private String tag;
     private Map<String, String> attributes;
-    private String textContent = null;
-    private List<Tag> tagList = null;
-
-    public Tag(
-            String tag, Map<String, String> attributes, String textContent,
-            List<Tag> tagList
-    ) {
-        this.tag = tag;
-        this.attributes = attributes;
-        this.tagList = tagList;
-        this.textContent = textContent;
-    }
 
     public Tag(String tag, Map<String, String> attributes) {
         this.tag = tag;
         this.attributes = attributes;
     }
 
-    public String toString() {
-        String startOfTag = "<" + tag + " ";
-        StringBuilder builder = new StringBuilder(startOfTag);
-        attributes.forEach((key, value) -> {
-            String attribute = String.format("%s=\"%s\" ", key, value);
-            builder.append(attribute);
-        });
+    public String stringifyAttributes() {
+        return attributes.keySet().stream()
+                .map(key -> {
+                    String value = attributes.get(key);
+                    return String.format(" %s=\"%s\"", key, value);
+                })
+                .collect(Collectors.joining(""));
+    }
 
-        return builder.toString().trim() + ">";
+    public String getTag() {
+        return tag;
     }
 }
 // END

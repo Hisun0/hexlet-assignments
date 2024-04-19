@@ -6,8 +6,7 @@ import java.util.stream.Collectors;
 
 // BEGIN
 public class PairedTag extends Tag {
-    private String tag;
-    private Map<String, String> attributes;
+
     private String textContent;
     private List<Tag> tagList;
 
@@ -15,12 +14,10 @@ public class PairedTag extends Tag {
             String tag, Map<String, String> attributes, String textContent,
             List<Tag> tagList
     ) {
-        super(tag, attributes, textContent, tagList);
+        super(tag, attributes);
 
-        this.tag = tag;
         this.tagList = tagList;
         this.textContent = textContent;
-        this.attributes = attributes;
     }
 
     public String toString() {
@@ -28,7 +25,10 @@ public class PairedTag extends Tag {
                 .map(Tag::toString)
                 .collect(Collectors.joining(""));
 
-        return super.toString() + textContent + singleTags + "</" + tag + ">";
+        return String.format(
+                "<%s%s>%s%s</%s>",
+                getTag(), stringifyAttributes(), textContent, singleTags, getTag()
+        );
     }
 }
 // END
