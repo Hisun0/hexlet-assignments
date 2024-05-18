@@ -22,16 +22,16 @@ public final class App {
         app.get("/companies/{id}", context -> {
             var id = context.pathParam("id");
 
-            for (var company : COMPANIES) {
-                var companyId = company.get("id");
+            var company = COMPANIES.stream()
+                    .filter(com -> com.get("id").equals(id))
+                    .findFirst()
+                    .orElse(null);
 
-                if (companyId.equals(id)) {
-                    context.json(company);
-                    return;
-                }
+            if (company == null) {
+                throw new NotFoundResponse("Company not found");
             }
 
-            throw new NotFoundResponse("Company not found");
+            context.json(company);
         });
         // END
 
