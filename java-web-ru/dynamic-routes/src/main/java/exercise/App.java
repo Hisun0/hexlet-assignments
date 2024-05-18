@@ -20,12 +20,12 @@ public final class App {
 
         // BEGIN
         app.get("/companies/{id}", context -> {
-            int id = context.pathParamAsClass("id", Integer.class).get();
+            var id = context.pathParam("id");
 
             for (var company : COMPANIES) {
                 var companyId = company.get("id");
 
-                if (companyId.equals(String.valueOf(id))) {
+                if (companyId.equals(id)) {
                     context.json(company);
                     return;
                 }
