@@ -36,7 +36,7 @@ public final class App {
                return;
            }
 
-           var page = new UsersPage(USERS, "");
+           var page = new UsersPage(USERS, term);
            ctx.render("users/index.jte", model("page", page));
         });
         // END
