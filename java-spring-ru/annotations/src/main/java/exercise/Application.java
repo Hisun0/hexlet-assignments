@@ -10,13 +10,11 @@ public class Application {
 
         // BEGIN
         for (var method : Address.class.getDeclaredMethods()) {
-            var types = method.getReturnType().toString().split("\\.");
-
             if (method.isAnnotationPresent(Inspect.class)) {
                 System.out.println(method.getName());
                 System.out.printf(
                         "Method %s returns a value of type %s\n",
-                        method.getName(), types[types.length - 1]
+                        method.getName(), method.getReturnType().getSimpleName()
                 );
             }
         }
